@@ -1,0 +1,40 @@
+{
+  "name": "shell-cli",
+  "version": "0.0.1",
+  "description": "node.js command-line-interface programs",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "blanket": "*",
+    "rewire": "*"
+  },
+  "scripts": {
+    "test": "make test-all"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wyicwx/cmd-interface"
+  },
+  "keywords": [
+    "cmd",
+    "commander",
+    "cli",
+    "shell"
+  ],
+  "author": {
+    "name": "wyicwx",
+    "email": "wyicwx@gmail.com",
+    "web":  "http://weibo.com/simplemaple"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wyicwx/cmd-interface/issues"
+  },
+  "homepage": "https://github.com/wyicwx/cmd-interface"
+}
