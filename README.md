@@ -1,11 +1,13 @@
 # cmd-interface
 > node.js command-line-interface programs
 
-##INSTALL
+##安装
 
 ```shell
 npm install cmd-interface
 ```
+
+##
 
 ##LICENSES
 
