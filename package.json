@@ -1,5 +1,5 @@
 {
-  "name": "shell-cli",
+  "name": "cmd-interface",
   "version": "0.0.1",
   "description": "node.js command-line-interface programs",
   "main": "index.js",
@@ -27,6 +27,11 @@
     "cli",
     "shell"
   ],
+  "config": {
+    "blanket": {
+      "pattern": "cmd-interface/lib"
+    }
+  },
   "author": {
     "name": "wyicwx",
     "email": "wyicwx@gmail.com",

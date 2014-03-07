@@ -134,4 +134,14 @@ describe('parseArgv', function() {
 		}
 		assert.ok(false);
 	});
+
+	it('忽略--', function() {
+		var ret = parseArgv(['--']);
+
+		if(_.size(ret) == 1 && ret.hasOwnProperty('-')) {
+			assert.ok(true);
+		} else {
+			assert.ok(false);
+		}
+	});
 });
