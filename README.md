@@ -1,6 +1,8 @@
 # cmd-interface
 > node.js command-line-interface programs
 
+![travis](https://api.travis-ci.org/wyicwx/cmd-interface.png)
+
 ##安装
 
 ```shell
