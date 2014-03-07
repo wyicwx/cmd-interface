@@ -1,15 +1,67 @@
 # cmd-interface
-> node.js command-line-interface programs
-
 ![travis](https://api.travis-ci.org/wyicwx/cmd-interface.png)
 
+cmd-interface提供一种简单快速的方式来创建一个命令行交互式界面，通过简单的设置就可以获得强大的交互界面，并提供相关的交互函数。
+
 ##安装
+----
 
 ```shell
 npm install cmd-interface
 ```
 
-##
+
+```
+  Usage: cmd-interface <command>
+
+  Command:
+
+    start                         start server                  
+
+  Option:
+
+    -h,--help                     help                          
+    -s,--save                     save something infomation     
+    -v,--version                                                
+```
+
+```javascript
+var cmdInterface = require('cmd-interface');
+var cmd = new cmdInterface.Commander();
+```
+
+* define
+
+cmd的define方法定义command和option
+
+```javascript
+cmd.define({
+    cmd: 'start',
+    descript: 'start server',
+    handler: function(parse) {
+        //do something
+    }
+})
+```
+
+
+```javascript
+cmd.define({
+    opt: '-b,--build',
+    descript: 'start server',
+    handler: function(parse) {
+        //do something
+    }
+})
+```
+
+* run 
+
+
+
+* emit
+
+其中parse为parseArgv解析返回的对象
 
 ##LICENSES
 

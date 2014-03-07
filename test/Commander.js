@@ -11,7 +11,7 @@ describe('Commander', function() {
 	it('事件式相应函数', function(done) {
 		var cmd = new Commander();
 
-		cmd.define({
+		cmd.command({
 			cmd: 'test',
 			description: 'test'
 		});
@@ -26,7 +26,7 @@ describe('Commander', function() {
 	it('回调式相应', function(done) {
 		var cmd = new Commander();
 
-		cmd.define({
+		cmd.command({
 			cmd: 'test',
 			description: 'test',
 			handler: function(data, all) {
@@ -40,7 +40,23 @@ describe('Commander', function() {
 	it('不存在opt或者cmd时候会报错', function() {
 		var cmd = new Commander();
 		assert.throws(function() {
-			cmd.define({
+			cmd.command({
+				description: 'test'
+			});
+		});
+
+		assert.throws(function() {
+			cmd.option({
+				description: 'test'
+			});
+		});
+	});
+
+	it('定义cmd,以-开头应该报错', function() {
+		var cmd = new Commander();
+		assert.throws(function() {
+			cmd.command({
+				cmd: '-test',
 				description: 'test'
 			});
 		});
@@ -49,13 +65,13 @@ describe('Commander', function() {
 	it('没有正确输入command时应该触发help', function(done) {
 		var cmd = new Commander();
 		
-		cmd.define({
+		cmd.command({
 			cmd: 'test',
 			description: 'test',
 
 		});
-		cmd.define({
-			opt: '-t,--test',
+		cmd.option({
+			cmd: '-t,--test',
 			description: '-t,--test',
 		});
 		cmd.on('-h,--help', function() {
@@ -78,7 +94,7 @@ describe('Commander', function() {
 	it('定义command,且可以正确被执行', function(done) {
 		var cmd = new Commander();
 
-		cmd.define({
+		cmd.command({
 			cmd: 'test',
 			description: 'test',
 			handler: function() {
@@ -92,8 +108,8 @@ describe('Commander', function() {
 	it('定义option,且可以正确被执行, -b xx情况', function(done) {
 		var cmd = new Commander();
 
-		cmd.define({
-			opt: '-b,--block',
+		cmd.option({
+			cmd: '-b,--block',
 			description: '-b,--block',
 			handler: function() {
 				done();
@@ -101,14 +117,13 @@ describe('Commander', function() {
 		});
 
 		cmd.run(['-b', 'xx']);
-
 	});
 
 	it('定义option,且可以正确被执行, -b=xx情况', function(done) {
 		var cmd = new Commander();
 
-		cmd.define({
-			opt: '-b,--block',
+		cmd.option({
+			cmd: '-b,--block',
 			description: '-b,--block',
 			handler: function() {
 				done();
@@ -118,18 +133,22 @@ describe('Commander', function() {
 		cmd.run(['-b=xx']);
 	});
 
-	it('定义cmd以-开头会报错', function() {
+	it('解析的参数传入handler参数', function(done) {
 		var cmd = new Commander();
-		assert.throws(function() {
-			cmd.define({
-				cmd: '-test',
-				description: 'test'
-			});
-		});
-	});
 
-	it('定义cmd', function() {
-		
+		cmd.option({
+			cmd: '-t,--test',
+			description: 'test',
+			handler: function(parse) {
+				if(parse && parse.t[0] == 'test' && parse.n[0] == 'never') {
+					done();
+				} else {
+					done(false);
+				}
+			}
+		});
+
+		cmd.run(['-t', 'test', '-n', 'never']);
 	});
 });
 
