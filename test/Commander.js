@@ -150,5 +150,12 @@ describe('Commander', function() {
 
 		cmd.run(['-t', 'test', '-n', 'never']);
 	});
+
+	it('设置version', function() {
+		var cmd = new Commander();
+
+		cmd.version('0.0.1');
+		cmd.run(['-v']);
+	});
 });
 
