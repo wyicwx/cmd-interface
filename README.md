@@ -4,14 +4,42 @@
 cmd-interface提供一种简单快速的方式来创建一个命令行交互式界面，通过简单的设置就可以获得强大的交互界面，并提供相关的交互函数。
 
 ##安装
-----
 
 ```shell
 npm install cmd-interface
 ```
 
 
+```javascript
+    var Commander = require('../').Commander;
+    
+    var cmd = new Commander({
+        name: 'cmd-interface'
+    });
+    
+    cmd.option({
+    	cmd: '-s,--save',
+    	description: 'save something infomation',
+    	handler: function() {
+    		conosle.log('save handler!');
+    	}
+    });
+    
+    cmd.command({
+    	cmd: 'start',
+    	description: 'start server',
+    	handler: function() {
+    		console.log('start server!');
+    	}
+    });
+    
+    cmd.version('0.0.1');
+    cmd.run();
 ```
+
+
+
+```javascript
   Usage: cmd-interface <command>
 
   Command:
@@ -55,11 +83,7 @@ cmd.define({
 })
 ```
 
-* run 
 
-
-
-* emit
 
 其中parse为parseArgv解析返回的对象
 
