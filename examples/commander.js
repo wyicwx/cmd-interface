@@ -9,15 +9,25 @@ var cmd = new Commander({
 cmd.option({
 	cmd: '-s,--save',
 	description: 'save something infomation',
-	handler: function() {
-		conosle.log('save handler!');
+	handler: function(parse) {
+		console.log('save handler!');
 	}
 });
+
+cmd.option({
+	cmd: '-hi,--hidden',
+	description: 'hidden option',
+	visible: false,
+	handler: function(parse) {
+		console.log('hidden option!');
+	}
+});
+
 
 cmd.command({
 	cmd: 'start',
 	description: 'start server',
-	handler: function() {
+	handler: function(parse) {
 		console.log('start server!');
 	}
 });

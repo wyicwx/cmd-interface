@@ -9,35 +9,48 @@ cmd-interface提供一种简单快速的方式来创建一个命令行交互式�
 npm install cmd-interface
 ```
 
+##简单配置
 
 ```javascript
-    var Commander = require('../').Commander;
-    
-    var cmd = new Commander({
-        name: 'cmd-interface'
-    });
-    
-    cmd.option({
-    	cmd: '-s,--save',
-    	description: 'save something infomation',
-    	handler: function() {
-    		conosle.log('save handler!');
-    	}
-    });
-    
-    cmd.command({
-    	cmd: 'start',
-    	description: 'start server',
-    	handler: function() {
-    		console.log('start server!');
-    	}
-    });
-    
-    cmd.version('0.0.1');
-    cmd.run();
+#!/usr/bin/env node
+
+var Commander = require('../').Commander;
+
+var cmd = new Commander({
+	name: 'cmd-interface'
+});
+
+cmd.option({
+	cmd: '-s,--save',
+	description: 'save something infomation',
+	handler: function(parse) {
+		conosle.log('save handler!');
+	}
+});
+
+cmd.option({
+	cmd: '-hi,--hidden',
+	description: 'hidden option',
+	visible: false,
+	handler: function(parse) {
+		conosle.log('save handler!');
+	}
+});
+
+
+cmd.command({
+	cmd: 'start',
+	description: 'start server',
+	handler: function(parse) {
+		console.log('start server!');
+	}
+});
+
+cmd.version('0.0.1');
+cmd.run();
 ```
 
-
+运行后可见界面
 
 ```javascript
   Usage: cmd-interface <command>
@@ -48,44 +61,64 @@ npm install cmd-interface
 
   Option:
 
-    -h,--help                     help                          
     -s,--save                     save something infomation     
     -v,--version                                                
 ```
 
-```javascript
-var cmdInterface = require('cmd-interface');
-var cmd = new cmdInterface.Commander();
-```
-
-* define
-
-cmd的define方法定义command和option
+Commander继承自EventEmitter，可以通过添加事件的方式来添加handler
 
 ```javascript
-cmd.define({
-    cmd: 'start',
-    descript: 'start server',
-    handler: function(parse) {
-        //do something
-    }
-})
+cmd.on('start', function(parse) {
+    console.log('  start handler again!');
+});
 ```
 
 
+parse为[parseArgv()](#parseargv)返回的对象
+
+
+通过command函数定义的cmd可以使用tab补全命令，而通过option函数定义的cmd可以通过设置visible=false不展示
+
+## Util
+
+util提供交互函数
+
 ```javascript
-cmd.define({
-    opt: '-b,--build',
-    descript: 'start server',
-    handler: function(parse) {
-        //do something
-    }
-})
+var util = require('../').util;
 ```
 
+####*parseArgv*
 
+解析process.argv，返回格式如下
 
-其中parse为parseArgv解析返回的对象
+```
+ var argv = util.parseArgv(['-a', 'b', 'c', '-d=e', '--f=g', 'h', 'i']);
+ return {
+ 	'_': ['h', 'i'],
+ 	'a': ['b', 'c'],
+ 	'd': ['e'],
+ 	'f': ['g']
+ }
+```
+
+####*read*
+
+命令行交互函数
+
+```
+ util.read('input something', function(data) {
+    conosle.log(data);
+ });
+```
+
+####*printfFormat*
+
+提供类似c的printf格式化函数，可以设置宽度，%s、$d、$j参数参看[util.format](http://nodejs.org/api/util.html#util_util_format_format)
+
+```
+ var read = util.printfFormat('%4s%s4', '$', '$');
+ read = '$      $'
+```
 
 ##LICENSES
 
