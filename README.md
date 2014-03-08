@@ -33,7 +33,7 @@ cmd.option({
 	description: 'hidden option',
 	visible: false,
 	handler: function(parse) {
-		conosle.log('save handler!');
+		conosle.log('hidden handler!');
 	}
 });
 
@@ -72,12 +72,28 @@ cmd.on('start', function(parse) {
     console.log('  start handler again!');
 });
 ```
-
+事件名同传入cmd.command的cmd参数，添加option的handler事件名为全称且中间不能有空格
+```javascript
+cmd.on('-s,--save', function(parse) {
+    console.log('  save handler again!');
+});
+```
 
 parse为[parseArgv()](#parseargv)返回的对象
 
 
 option()通过传入参数visible=false不在输出help
+
+```
+cmd.option({
+	cmd: '-hi,--hidden',
+	description: 'hidden option',
+	visible: false,
+	handler: function(parse) {
+		conosle.log('save handler!');
+	}
+});
+```
 
 设置版本号
 
@@ -87,7 +103,7 @@ cmd.version('0.0.1');
 
 输出help
 ```
-cmd.help()
+cmd.help();
 ```
 
 
