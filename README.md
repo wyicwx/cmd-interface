@@ -77,7 +77,19 @@ cmd.on('start', function(parse) {
 parse为[parseArgv()](#parseargv)返回的对象
 
 
-通过command函数定义的cmd可以使用tab补全命令，而通过option函数定义的cmd可以通过设置visible=false不展示
+option()通过传入参数visible=false不在输出help
+
+设置版本号
+
+```
+cmd.version('0.0.1');
+```
+
+输出help
+```
+cmd.help()
+```
+
 
 ## Util
 
