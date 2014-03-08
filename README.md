@@ -14,7 +14,7 @@ npm install cmd-interface
 ```javascript
 #!/usr/bin/env node
 
-var Commander = require('../').Commander;
+var Commander = require('cmd-interface').Commander;
 
 var cmd = new Commander({
 	name: 'cmd-interface'
@@ -79,7 +79,7 @@ cmd.on('-s,--save', function(parse) {
 });
 ```
 
-parse为[parseArgv()](#parseargv)返回的对象
+parse为[parseArgv()](#parseargv)函数解析返回的对象
 
 
 option()通过传入参数visible=false不在输出help
@@ -112,7 +112,7 @@ cmd.help();
 util提供交互函数
 
 ```javascript
-var util = require('../').util;
+var util = require('cmd-interface').util;
 ```
 
 ####*parseArgv*
