@@ -119,6 +119,27 @@ describe('parseArgv', function() {
 		}
 	});
 
+	it('-a=1 -a=2，可以同时解析出1、2', function() {
+		var ret = parseArgv(['-a=1', '-a=2']);
+
+		if(ret.a.length == 2 && ret.a[0] == '1' && ret.a[1] == '2') {
+			assert.ok(true);
+		} else {
+			assert.ok(false);
+		}
+	});
+
+	it('-a 1 -a 2，可以同时解析出1、2', function() {
+		var ret = parseArgv(['-a', '1', '-a', '2']);
+
+		if(ret.a.length == 2 && ret.a[0] == '1' && ret.a[1] == '2') {
+			assert.ok(true);
+		} else {
+			assert.ok(false);
+		}
+
+	});
+
 	it('混合解析--start -port 80 81 -host=localhost why I\'m in here', function() {
 		var ret = parseArgv(['--start', '-port', '80', '81', '-host=localhost', 'why', 'I\'m', 'in', 'here']);
 
