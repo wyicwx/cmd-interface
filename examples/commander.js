@@ -15,7 +15,7 @@ cmd.option({
 });
 
 cmd.option({
-	cmd: '-hi,--hidden',
+	cmd: '-H,--hidden',
 	description: 'hidden option',
 	visible: false,
 	handler: function(parse) {

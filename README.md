@@ -29,7 +29,7 @@ cmd.option({
 });
 
 cmd.option({
-	cmd: '-hi,--hidden',
+	cmd: '-H,--hidden',
 	description: 'hidden option',
 	visible: false,
 	handler: function(parse) {
@@ -86,7 +86,7 @@ option()通过传入参数visible=false不在输出help
 
 ```
 cmd.option({
-	cmd: '-hi,--hidden',
+	cmd: '-H,--hidden',
 	description: 'hidden option',
 	visible: false,
 	handler: function(parse) {
@@ -122,7 +122,7 @@ var util = require('cmd-interface').util;
 ```
  var argv = util.parseArgv(['-a', 'b', 'c', '-d=e', '--f=g', 'h', 'i']);
  return {
- 	'_': ['h', 'i'],
+ 	'-': ['h', 'i'],
  	'a': ['b', 'c'],
  	'd': ['e'],
  	'f': ['g']
