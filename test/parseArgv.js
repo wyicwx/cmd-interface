@@ -119,20 +119,20 @@ describe('parseArgv', function() {
 		}
 	});
 
-	it('-a=1 -a=2，可以同时解析出1、2', function() {
+	it('-a=1 -a=2，只能解析出2，后面参数覆盖前面参数', function() {
 		var ret = parseArgv(['-a=1', '-a=2']);
 
-		if(ret.a.length == 2 && ret.a[0] == '1' && ret.a[1] == '2') {
+		if(ret.a.length == 1 && ret.a[0] == '2') {
 			assert.ok(true);
 		} else {
 			assert.ok(false);
 		}
 	});
 
-	it('-a 1 -a 2，可以同时解析出1、2', function() {
+	it('-a 1 -a 2，只能解析出2，后面参数覆盖前面参数 ', function() {
 		var ret = parseArgv(['-a', '1', '-a', '2']);
 
-		if(ret.a.length == 2 && ret.a[0] == '1' && ret.a[1] == '2') {
+		if(ret.a.length == 1 && ret.a[0] == '2') {
 			assert.ok(true);
 		} else {
 			assert.ok(false);
