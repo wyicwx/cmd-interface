@@ -82,7 +82,7 @@ cmd.on('-s,--save', function(parse) {
 parse为[parseArgv()](#parseargv)函数解析返回的对象
 
 
-option()通过传入参数visible=false不在输出help
+option()、command()都可以通过传入参数visible=false不在输出help
 
 ```
 cmd.option({
@@ -91,6 +91,14 @@ cmd.option({
 	visible: false,
 	handler: function(parse) {
 		conosle.log('save handler!');
+	}
+});
+cmd.command({
+	cmd: 'stop',
+	description: 'stop server',
+	visible: false,
+	handler: function(parse) {
+		console.log('stop server!');
 	}
 });
 ```

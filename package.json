@@ -1,6 +1,6 @@
 {
   "name": "cmd-interface",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "node.js command-line-interface programs",
   "main": "index.js",
   "directories": {
